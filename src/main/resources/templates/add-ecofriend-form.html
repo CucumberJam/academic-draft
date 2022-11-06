@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Участники процесса переработки вторсырья</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Recycling partnership</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       th:href="@{/register}">Регистрация</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <hr/>
+    <h3>Добавьте нового участника</h3>
+    <hr/>
+    <form th:action="@{/saveEcofriend}" th:object="${ecofriend}" method="POST">
+        <p><input type="radio" name="type" th:value="OOO" th:field="*{type}" class="form-control col-4 mb-4"/>ООО</p>
+        <p><input type="radio" name="type" th:value="ИП" th:field="*{type}" class="form-control col-4 mb-4"/>ИП</p>
+        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Наименование участника"/>
+        <input type="text" th:field="*{identity}" class="form-control col-4 mb-4" placeholder="ОГРН/ОГРНИП"/>
+        <input type="text" th:field="*{address}" class="form-control col-4 mb-4" placeholder="Адрес места нахождения"/>
+        <p><input type="radio" name="partnership" th:value="Поставщик" th:field="*{partnership}" class="form-control col-4 mb-4"/>Поставщик отходов</p>
+        <p><input type="radio" name="partnership" th:value="Покупатель" th:field="*{partnership}" class="form-control col-4 mb-4"/>Покупатель отходов</p>
+        <input type="tel" th:field="*{phone}" class="form-control col-4 mb-4" placeholder="Телефон"/>
+        <p><input type="radio" name="material" th:value="пластик" th:field="*{material}" class="form-control col-4 mb-4"/>Пластик</p>
+        <p><input type="radio" name="material" th:value="стекло" th:field="*{material}" class="form-control col-4 mb-4"/>Стекло</p>
+        <p><input type="radio" name="material" th:value="картон" th:field="*{material}" class="form-control col-4 mb-4"/>Картон</p>
+        <p><input type="radio" name="material" th:value="бумага" th:field="*{material}" class="form-control col-4 mb-4"/>Бумага</p>
+        <button type="submit" class="btn btn-primary col-2">Save</button>
+        <input type="hidden" th:field="*{id}"/>
+    </form>
+    <hr/>
+    <a th:href="@{/list}">Назад к списку</a>
+</div>
+</body>
+</html>
